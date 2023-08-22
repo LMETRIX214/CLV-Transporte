@@ -1,0 +1,338 @@
+[
+    {
+        "pcl": "21M",
+        "localidad": "21 de Marzo"
+    },
+    {
+        "pcl": "A",
+        "localidad": "Agrarista"
+    },
+    {
+        "pcl": "ASA",
+        "localidad": "Agrarista Sector Alcanfores"
+    },
+    {
+        "pcl": "AEZ",
+        "localidad": "Ampliación Emiliano Zapata"
+    },
+    {
+        "pcl": "BCI",
+        "localidad": "Bosques de Chalco I"
+    },
+    {
+        "pcl": "BCII",
+        "localidad": "Bosques de Chalco II"
+    },
+    {
+        "pcl": "CSC",
+        "localidad": "Campestre Santa Cruz"
+    },
+    {
+        "pcl": "CAP",
+        "localidad": "Capultitla"
+    },
+    {
+        "pcl": "CSJ",
+        "localidad": "Casco de San Juan"
+    },
+    {
+        "pcl": "CDC",
+        "localidad": "Caserío de Cortés"
+    },
+    {
+        "pcl": "CDC1",
+        "localidad": "Chalco de Díaz Covarrubias Centro"
+    },
+    {
+        "pcl": "CCM",
+        "localidad": "Clara Córdoba Morán"
+    },
+    {
+        "pcl": "CHHC",
+        "localidad": "Conjunto Habitacional Los Héroes Chalco"
+    },
+    {
+        "pcl": "COV",
+        "localidad": "Covadonga"
+    },
+    {
+        "pcl": "CMX",
+        "localidad": "Culturas de México"
+    },
+    {
+        "pcl": "EJI",
+        "localidad": "Ejidal"
+    },
+    {
+        "pcl": "ENJ",
+        "localidad": "El Naranjo"
+    },
+    {
+        "pcl": "EPA",
+        "localidad": "El Paraíso"
+    },
+    {
+        "pcl": "ERSJA",
+        "localidad": "El Recodo de San José Axalco"
+    },
+    {
+        "pcl": "ESO",
+        "localidad": "El Socorro"
+    },
+    {
+        "pcl": "EMZ",
+        "localidad": "Emiliano Zapata"
+    },
+    {
+        "pcl": "EHG",
+        "localidad": "Ex-hacienda de Guadalupe"
+    },
+    {
+        "pcl": "EHSJ",
+        "localidad": "Ex-Hacienda San Juan"
+    },
+    {
+        "pcl": "FA",
+        "localidad": "Fraternidad Antorchista"
+    },
+    {
+        "pcl": "GLC",
+        "localidad": "Gonzalo López Cid"
+    },
+    {
+        "pcl": "GC",
+        "localidad": "Granjas Chalco"
+    },
+    {
+        "pcl": "GU",
+        "localidad": "Guadalupe"
+    },
+    {
+        "pcl": "HM",
+        "localidad": "Hacienda del Moral (El Moral)"
+    },
+    {
+        "pcl": "HVM",
+        "localidad": "Humberto Vidal Mendoza"
+    },
+    {
+        "pcl": "INDE",
+        "localidad": "Independencia"
+    },
+    {
+        "pcl": "INCH",
+        "localidad": "Independencia Chimalpa"
+    },
+    {
+        "pcl": "IC",
+        "localidad": "Industrial Chalco"
+    },
+    {
+        "pcl": "JI",
+        "localidad": "Jacalones I"
+    },
+    {
+        "pcl": "JII",
+        "localidad": "Jacalones II"
+    },
+    {
+        "pcl": "JC",
+        "localidad": "Jardines de Chalco"
+    },
+    {
+        "pcl": "JLF",
+        "localidad": "Jazmín de las Flores"
+    },
+    {
+        "pcl": "LB",
+        "localidad": "La Bomba"
+    },
+    {
+        "pcl": "LCT",
+        "localidad": "La Candelaria Tlapala"
+    },
+    {
+        "pcl": "LCH",
+        "localidad": "La Chimenea"
+    },
+    {
+        "pcl": "LC",
+        "localidad": "La Conchita"
+    },
+    {
+        "pcl": "LH",
+        "localidad": "Las Huertas"
+    },
+    {
+        "pcl": "LN",
+        "localidad": "Las Nieves"
+    },
+    {
+        "pcl": "LDM",
+        "localidad": "Llano del Moral"
+    },
+    {
+        "pcl": "LSP",
+        "localidad": "Lomas de San Pablo"
+    },
+    {
+        "pcl": "LA",
+        "localidad": "Los Álamos"
+    },
+    {
+        "pcl": "LC1",
+        "localidad": "Los Cipreses"
+    },
+    {
+        "pcl": "LV",
+        "localidad": "Los Volcanes"
+    },
+    {
+        "pcl": "LV2S",
+        "localidad": "Los Volcanes 2da. Sección"
+    },
+    {
+        "pcl": "MAS",
+        "localidad": "Marco Antonio Sosa"
+    },
+    {
+        "pcl": "MCM",
+        "localidad": "Margarita Córdoba Morán"
+    },
+    {
+        "pcl": "MIC",
+        "localidad": "Michoacana"
+    },
+    {
+        "pcl": "NSA",
+        "localidad": "Nueva San Antonio"
+    },
+    {
+        "pcl": "NSI",
+        "localidad": "Nueva San Isidro"
+    },
+    {
+        "pcl": "NSM",
+        "localidad": "Nueva San Miguel"
+    },
+    {
+        "pcl": "PDC",
+        "localidad": "Paseos de Chalco"
+    },
+    {
+        "pcl": "PT",
+        "localidad": "Pedregal Tezompa"
+    },
+    {
+        "pcl": "PC",
+        "localidad": "Portal de Chalco"
+    },
+    {
+        "pcl": "PN",
+        "localidad": "Pueblo Nuevo"
+    },
+    {
+        "pcl": "PC1",
+        "localidad": "Punto Chalco"
+    },
+    {
+        "pcl": "RA",
+        "localidad": "Rancho Amigo"
+    },
+    {
+        "pcl": "SA",
+        "localidad": "San Antonio"
+    },
+    {
+        "pcl": "SB7S",
+        "localidad": "San Buenaventura 7a Sección"
+    },
+    {
+        "pcl": "SC",
+        "localidad": "San Cristóbal"
+    },
+    {
+        "pcl": "SF",
+        "localidad": "San Francisco"
+    },
+    {
+        "pcl": "SGC",
+        "localidad": "San Gregorio Cuautzingo"
+    },
+    {
+        "pcl": "SJ",
+        "localidad": "San José"
+    },
+    {
+        "pcl": "SJT",
+        "localidad": "San Juan Tezompa"
+    },
+    {
+        "pcl": "SLC",
+        "localidad": "San Lorenzo Chimalpa"
+    },
+    {
+        "pcl": "SLA",
+        "localidad": "San Lucas Amalinalco"
+    },
+    {
+        "pcl": "SMH",
+        "localidad": "San Marcos Huixtoco"
+    },
+    {
+        "pcl": "SMC",
+        "localidad": "San Martín Cuautlalpan"
+    },
+    {
+        "pcl": "SMXN",
+        "localidad": "San Martín Xico Nuevo"
+    },
+    {
+        "pcl": "SMH1",
+        "localidad": "San Mateo Huitzilzingo"
+    },
+    {
+        "pcl": "SMTM",
+        "localidad": "San Mateo Tezoquipan Miraflores"
+    },
+    {
+        "pcl": "SAA",
+        "localidad": "San Pablo Atlazalpan"
+    },
+    {
+        "pcl": "SS",
+        "localidad": "San Sebastián"
+    },
+    {
+        "pcl": "SAPSJ",
+        "localidad": "Santa Ana (Predio San Juan)"
+    },
+    {
+        "pcl": "SCA",
+        "localidad": "Santa Catarina Ayotzingo"
+    },
+    {
+        "pcl": "SCA1",
+        "localidad": "Santa Cruz Amalinalco"
+    },
+    {
+        "pcl": "SMH2",
+        "localidad": "Santa María Huexoculco"
+    },
+    {
+        "pcl": "TM",
+        "localidad": "Tres Marías"
+    },
+    {
+        "pcl": "UDG",
+        "localidad": "Unión de Guadalupe"
+    },
+    {
+        "pcl": "VDC",
+        "localidad": "Villas de Chalco"
+    },
+    {
+        "pcl": "VDSM",
+        "localidad": "Villas de San Martín"
+    }
+]

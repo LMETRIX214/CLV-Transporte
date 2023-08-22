@@ -1,0 +1,147 @@
+<!--
+    @version 1.60(BETA)
+    @author LMETRIX214 <https://linktr.ee/lmetrix214>
+    @exclusive use for COLEGIO LEONA VICARIO
+    @subject For school administrators and parents
+    @date August 21, 2023
+    @description school transportation request
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adm-Registrados</title>
+    <link rel="icon" href="../images/logo.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #dddddd;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .table-container {
+            width: 80%;
+            overflow-x: auto;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px 0px #888;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+
+        table th {
+            background-color: #007BFF;
+            color: #fff;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="search" placeholder="Buscar por ID" autocomplete="off">
+
+    <div class="table-container">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Localidad</th>
+                </tr>
+            </thead>
+            <tbody id="data-table">
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="../connection.js"></script>
+
+    <script>
+        var db = firebase.firestore();
+        var testCollection = db.collection("Test");
+        var dataTable = document.getElementById("data-table");
+        var searchInput = document.getElementById("search");
+
+        function showData(querySnapshot) {
+            dataTable.innerHTML = '';
+            querySnapshot.forEach(function (doc) {
+                if (doc.id !== "00") {
+                    var data = doc.data();
+                    var tableRow = document.createElement("tr");
+                    tableRow.innerHTML = `
+                        <td>${doc.id}</td>
+                        <td>${data.Nombre}</td>
+                        <td>${data.Localidad}</td>
+                    `;
+                    dataTable.appendChild(tableRow);
+                }
+            });
+        }
+
+        searchInput.addEventListener("input", function () {
+            var searchTerm = searchInput.value.trim();
+            if (searchTerm === "") {
+                testCollection.get().then(showData).catch(function (error) {
+                    console.error("Error al obtener datos: ", error);
+                });
+            } else {
+                testCollection.doc(searchTerm).get().then(function (doc) {
+                    if (doc.exists && doc.id !== "00") {
+                        showData(new Array(doc));
+                    } else {
+                        dataTable.innerHTML = '<tr><td colspan="3">No se encontraron resultados</td></tr>';
+                    }
+                }).catch(function (error) {
+                    console.error("Error al buscar por ID: ", error);
+                });
+            }
+        });
+
+        testCollection.onSnapshot(function (querySnapshot) {
+            showData(querySnapshot);
+        });
+
+        testCollection.get().then(showData).catch(function (error) {
+            console.error("Error al obtener datos: ", error);
+        });
+    </script>
+
+</body>
+
+</html>

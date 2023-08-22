@@ -1,0 +1,132 @@
+<!--
+    @version 1.60(BETA)
+    @author LMETRIX214 <https://linktr.ee/lmetrix214>
+    @exclusive use for COLEGIO LEONA VICARIO
+    @subject For school administrators and parents
+    @date August 21, 2023
+    @description school transportation request
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C.L.V.</title>
+    <link rel="icon" href="./images/logo.png" type="image/png">
+    <style>
+        :root {
+            --background-color: #dddddd;
+            --primary-color: #007bff;
+            --primary-color-hover: #0056b3;
+            --secondary-color: #fff;
+            --box-shadow-color: rgba(0, 0, 0, 0.1);
+            --text-color: #333;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--background-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 3px 8px var(--box-shadow-color);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        button {
+            width: 150px;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: var(--primary-color-hover);
+        }
+
+        #support-bubble {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 50px 50px 50px 0;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 1000;
+        }
+
+        #support-bubble:hover {
+            background-color: var(--primary-color-hover);
+        }
+
+        #support-link {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <button id="Stransporte">Solicitar transporte</button>
+        </div>
+        <br>
+        <div>
+            <button id="Etransporte">Editar días de transporte</button>
+        </div>
+    </div>
+
+    <div id="support-bubble">
+        <a id="support-link" href="https://t.me/LMETRIX214">Contactar a Soporte</a>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function () {
+            const bubble = document.getElementById('support-bubble');
+            const supportLink = document.getElementById('support-link');
+            const topOffset = 20;
+
+            if (window.scrollY > topOffset) {
+                bubble.style.top = (window.scrollY - topOffset) + 'px';
+                supportLink.style.display = 'none';
+            } else {
+                bubble.style.top = topOffset + 'px';
+                supportLink.style.display = 'block';
+            }
+        });
+
+        const botonTransporteS = document.getElementById("Stransporte");
+        botonTransporteS.addEventListener("click", function () {
+            window.location.href = "./users/index.html";
+        });
+        const botonTransporteE = document.getElementById("Etransporte");
+        botonTransporteE.addEventListener("click", function () {
+            window.location.href = "./users/modification.html";
+        });
+    </script>
+</body>
+
+</html>

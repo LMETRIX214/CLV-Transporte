@@ -1,0 +1,121 @@
+<!--
+    @version 1.60(BETA)
+    @author LMETRIX214 <https://linktr.ee/lmetrix214>
+    @exclusive use for COLEGIO LEONA VICARIO
+    @subject For school administrators and parents
+    @date August 21, 2023
+    @description school transportation request
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar seguimiento</title>
+    <link rel="icon" href="../images/logo.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #dddddd;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px #888;
+            text-align: center;
+            width: 300px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="button"] {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="button"]:hover {
+            background-color: #0056b3;
+        }
+
+        #respues {
+            border: 1px solid #272727;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #949494;
+
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="formulario">
+        <label for="id">ID:</label>
+        <input type="text" id="id" autocomplete="off" required><br>
+        <label for="respues">Seguimiento:</label>
+        <input type="text" id="respues" autocomplete="off" placeholder=" " readonly><br>
+        <input type="hidden" id="pcl" name="pcl">
+        <br>
+        <button type="button" id="verificar">Verificar</button>
+        <button type="button" id="Transporte">Transporte</button>
+    </form>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="../connection.js"></script>
+    <script>
+        document.getElementById('verificar').addEventListener('click', () => {
+            const id = document.getElementById('id').value;
+            db.collection('Test').doc(id).get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        console.log(doc.data().ID);
+                        document.getElementById('respues').value = doc.data().ID;
+                    } else {
+                        console.log('ID no encontrado');
+                        document.getElementById('respues').value = 'ID no encontrado';
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error al buscar el ID:', error);
+                    document.getElementById('respues').value = 'Error al buscar el ID';
+                });
+        });
+
+        document.getElementById('Transporte').addEventListener('click', () => {
+            const res = document.getElementById('respues').value;
+            var url = "./modification.html?id=" + encodeURIComponent(res);
+            console.log(url)
+            window.location.href = url;
+        });
+    </script>
+</body>
+
+</html>

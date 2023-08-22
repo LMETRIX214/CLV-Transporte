@@ -1,0 +1,251 @@
+<!--
+    @version 1.60(BETA)
+    @author LMETRIX214 <https://linktr.ee/lmetrix214>
+    @exclusive use for COLEGIO LEONA VICARIO
+    @subject For school administrators and parents
+    @date August 21, 2023
+    @description school transportation request
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/logo.png" type="image/png">
+    <title>C.L.V.</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #dddddd;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px #888;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        #enviar {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #enviar:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #007BFF;
+        }
+
+        a {
+            color: #007BFF;
+        }
+
+        a:hover {
+            color: #d10000;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="buscar-form">
+        <label for="id">Ingresa seguimiento:</label>
+        <input type="text" id="id" name="id" autocomplete="off" required>
+        <button type="submit">Verificar</button>
+        <br><br><a href="./recover.html">Recuperar seguimiento</a>
+    </form>
+
+    <div id="resultado">
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="../connection.js"></script>
+    <script>
+        const form = document.getElementById('buscar-form');
+        const resultadoDiv = document.getElementById('resultado');
+        const idInput = form.querySelector('#id');
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const idFromURL = urlParams.get('id');
+
+        if (idFromURL) {
+            idInput.value = idFromURL;
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = form.querySelector('#id').value;
+
+            const docRef = firebase.firestore().collection('US').doc(id);
+
+            try {
+                const doc = await docRef.get();
+
+                if (doc.exists) {
+                    const nombre = doc.data().Nombre;
+                    const localidad = doc.data().Localidad;
+                    const entrada = doc.data().Entrada;
+                    const salida = doc.data().Salida;
+
+                    resultadoDiv.innerHTML = `
+                        <p>Usuario: ${nombre}.</p>
+                        <form id="registro-form">
+                            <p>Entrada:</p>
+                            <label for="lunesEntrada">Lunes</label>
+                            <input type="checkbox" id="lunesEntrada" name="diasEntrada" ${entrada.Lunes ? 'checked' : ''}>
+                            <label for="martesEntrada">Martes</label>
+                            <input type="checkbox" id="martesEntrada" name="diasEntrada" ${entrada.Martes ? 'checked' : ''}>
+                            <label for="miércolesEntrada">Miércoles</label>
+                            <input type="checkbox" id="miercolesEntrada" name="diasEntrada" ${entrada.Miercoles ? 'checked' : ''}>
+                            <label for="juevesEntrada">Jueves</label>
+                            <input type="checkbox" id="juevesEntrada" name="diasEntrada" ${entrada.Jueves ? 'checked' : ''}>
+                            <label for="viernesEntrada">Viernes</label>
+                            <input type="checkbox" id="viernesEntrada" name="diasEntrada" ${entrada.Viernes ? 'checked' : ''}>
+                            
+                            <p>Salida:</p>
+                            <label for="lunesSalida">Lunes</label>
+                            <input type="checkbox" id="lunesSalida" name="diasSalida" ${salida.Lunes ? 'checked' : ''}>
+                            <label for="martesSalida">Martes</label>
+                            <input type="checkbox" id="martesSalida" name="diasSalida" ${salida.Martes ? 'checked' : ''}>
+                            <label for="miércolesSalida">Miércoles</label>
+                            <input type="checkbox" id="miercolesSalida" name="diasSalida" ${salida.Miercoles ? 'checked' : ''}>
+                            <label for="juevesSalida">Jueves</label>
+                            <input type="checkbox" id="juevesSalida" name="diasSalida" ${salida.Jueves ? 'checked' : ''}>
+                            <label for="viernesSalida">Viernes</label>
+                            <input type="checkbox" id="viernesSalida" name="diasSalida" ${salida.Viernes ? 'checked' : ''}>
+                            
+                            <br><br><hr><label for="observaciones">Observaciones:</label><br>
+                            <textarea id="observaciones" name="observaciones" rows="4" cols="50"></textarea>
+
+
+                            <button type="button" id="enviar">Enviar</button>
+                        </form>
+                    `;
+
+                    const enviarButton = document.getElementById('enviar');
+                    enviarButton.addEventListener('click', async () => {
+                        const observaciones = document.getElementById('observaciones').value;
+
+                        const entradaLunes = document.getElementById('lunesEntrada').checked;
+                        const entradaMartes = document.getElementById('martesEntrada').checked;
+                        const entradaMiercoles = document.getElementById('miercolesEntrada').checked;
+                        const entradaJueves = document.getElementById('juevesEntrada').checked;
+                        const entradaViernes = document.getElementById('viernesEntrada').checked;
+
+                        const salidaLunes = document.getElementById('lunesSalida').checked;
+                        const salidaMartes = document.getElementById('martesSalida').checked;
+                        const salidaMiercoles = document.getElementById('miercolesSalida').checked;
+                        const salidaJueves = document.getElementById('juevesSalida').checked;
+                        const salidaViernes = document.getElementById('viernesSalida').checked;
+
+                        const dataToSave = {
+                            Seguimiento: id,
+                            Nombre: nombre,
+                            Localidad: localidad,
+                            Entrada: {
+                                Lunes: entradaLunes,
+                                Martes: entradaMartes,
+                                Miercoles: entradaMiercoles,
+                                Jueves: entradaJueves,
+                                Viernes: entradaViernes,
+                            },
+                            Salida: {
+                                Lunes: salidaLunes,
+                                Martes: salidaMartes,
+                                Miercoles: salidaMiercoles,
+                                Jueves: salidaJueves,
+                                Viernes: salidaViernes,
+                            },
+                            Observaciones: observaciones,
+                        };
+
+                        try {
+                            await firebase.firestore().collection('US').doc(id).set(dataToSave);
+                            alert('Datos guardados correctamente.');
+                        } catch (error) {
+                            alert('Error al guardar datos:', error);
+                        }
+                    });
+
+                } else {
+                    resultadoDiv.innerHTML = `<p>El seguimiento ${id} no existe o reinicio semana.</p>`;
+                }
+            } catch (error) {
+                alert('Error al buscar:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>

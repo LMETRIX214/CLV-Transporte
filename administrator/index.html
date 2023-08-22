@@ -1,0 +1,196 @@
+<!--
+    @version 1.60(BETA)
+    @author LMETRIX214 <https://linktr.ee/lmetrix214>
+    @exclusive use for COLEGIO LEONA VICARIO
+    @subject For school administrators and parents
+    @date August 21, 2023
+    @description school transportation request
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adm-AEB</title>
+  <link rel="icon" href="../images/logo.png" type="image/png">
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #dddddd;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    form {
+      max-width: 400px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px 0px #888;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    input[type="hidden"] {
+      display: none;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="formulario">
+    <label for="id">ID:</label>
+    <input type="text" id="id" autocomplete="off" required><br>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" autocomplete="off" required><br>
+    <label for="localidad">Localidad:</label>
+    <select id="localidad" autocomplete="off" required></select>
+    <input type="hidden" id="pcl" name="pcl">
+    <br>
+    <button type="button" id="guardar">Guardar</button>
+    <button type="button" id="borrar">Borrar</button>
+  </form>
+
+  <script src="../connection.js"></script>
+  <script>
+    var db = firebase.firestore();
+    var botonGuardar = document.getElementById('guardar');
+    var botonBorrar = document.getElementById('borrar');
+    var campoID = document.getElementById('id');
+    var campoNombre = document.getElementById('nombre');
+    var campoLocalidad = document.getElementById('localidad');
+    var campoPCL = document.getElementById('pcl');
+
+    fetch('../places.json')
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        var selectLocalidad = document.getElementById('localidad');
+
+        data.forEach(function (item) {
+          var option = document.createElement('option');
+          option.value = item.localidad;
+          option.textContent = item.localidad;
+          selectLocalidad.appendChild(option);
+        });
+
+        selectLocalidad.addEventListener('change', function () {
+          var selectedLocalidad = selectLocalidad.value;
+          var selectedPCL = data.find(function (item) {
+            return item.localidad === selectedLocalidad;
+          });
+
+          if (selectedPCL) {
+            campoPCL.value = selectedPCL.pcl;
+          } else {
+            campoPCL.value = '';
+          }
+        });
+      })
+      .catch(function (error) {
+        console.error('Error al cargar datos desde places.json: ', error);
+      });
+
+    campoID.addEventListener('input', function () {
+      var id = campoID.value;
+
+      if (id) {
+        var documentoRef = db.collection("Test").doc(id);
+        documentoRef.get().then(function (doc) {
+          if (doc.exists) {
+            var data = doc.data();
+            campoNombre.value = data.Nombre || '';
+            campoLocalidad.value = data.Localidad || '';
+            campoPCL.value = data.PCL || '';
+          } else {
+            campoNombre.value = '';
+            campoLocalidad.value = '';
+            campoPCL.value = '';
+          }
+        }).catch(function (error) {
+          console.error("Error al obtener el documento: ", error);
+        });
+      } else {
+        campoNombre.value = '';
+        campoLocalidad.value = '';
+        campoPCL.value = '';
+      }
+    });
+
+    botonGuardar.addEventListener('click', function () {
+      var id = campoID.value;
+      var nombre = campoNombre.value;
+      var localidad = campoLocalidad.value;
+      var pcl = campoPCL.value;
+
+      var documentoRef = db.collection("Test").doc(id);
+
+      documentoRef.set({
+        ID: pcl + "-" + id,
+        Nombre: nombre,
+        Palabra_Clave: pcl,
+        Localidad: localidad,
+        Usuario: id
+      })
+        .then(function () {
+          console.log("Documento almacenado con ID: ", id);
+          formulario.reset();
+        })
+        .catch(function (error) {
+          console.error("Error al almacenar el documento: ", error);
+        });
+    });
+
+    botonBorrar.addEventListener('click', function () {
+      var id = campoID.value;
+
+      var documentoRef = db.collection("Test").doc(id);
+
+      documentoRef.delete()
+        .then(function () {
+          console.log("Documento eliminado con ID: ", id);
+          formulario.reset();
+        })
+        .catch(function (error) {
+          console.error("Error al eliminar el documento: ", error);
+        });
+    });
+  </script>
+</body>
+
+</html>

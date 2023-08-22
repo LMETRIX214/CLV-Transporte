@@ -1,0 +1,261 @@
+<!--
+    @version 1.60(BETA)
+    @author LMETRIX214 <https://linktr.ee/lmetrix214>
+    @exclusive use for COLEGIO LEONA VICARIO
+    @subject For school administrators and parents
+    @date August 21, 2023
+    @description school transportation request
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adm-Transporte</title>
+    <link rel="icon" href="../images/logo.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #dddddd;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .table-container {
+            width: 100%;
+            max-width: 80%;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px 0px #888;
+            border-radius: 5px;
+        }
+
+        table th,
+        table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ccc;
+            word-break: break-word;
+        }
+
+        table th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        table thead {
+            position: sticky;
+            /*top: 0;*/
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+
+            table th,
+            table td {
+                font-size: 12px;
+            }
+        }
+
+        button[type="button"] {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="button"]:hover {
+            background-color: #b30000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <input type="text" id="search" placeholder="Buscar por seguimiento" autocomplete="off">
+    <button type="button" id="RSemana">Reiniciar semana</button>
+    <h3>Entrada</h3>
+    <div class="table-container">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Localidad</th>
+                    <th>Lunes</th>
+                    <th>Martes</th>
+                    <th>Miércoles</th>
+                    <th>Jueves</th>
+                    <th>Viernes</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody id="entrada-table">
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Salida</h3>
+    <div class="table-container">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Localidad</th>
+                    <th>Lunes</th>
+                    <th>Martes</th>
+                    <th>Miércoles</th>
+                    <th>Jueves</th>
+                    <th>Viernes</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody id="salida-table">
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="../connection.js"></script>
+
+    <script>
+        var db = firebase.firestore();
+        var testCollection = db.collection("US");
+        var entradaTable = document.getElementById("entrada-table");
+        var salidaTable = document.getElementById("salida-table");
+        var searchInput = document.getElementById("search");
+
+        function showEntradaData(querySnapshot) {
+            entradaTable.innerHTML = '';
+            querySnapshot.forEach(function (doc) {
+                if (doc.id !== "CDC1-00") {
+                    var data = doc.data();
+                    var tableRow = document.createElement("tr");
+                    tableRow.innerHTML = `
+                        <td>${doc.id}</td>
+                        <td>${data.Nombre}</td>
+                        <td>${data.Localidad}</td>
+                        <td>${data.Entrada.Lunes ? "Si" : "No"}</td>
+                        <td>${data.Entrada.Martes ? "Si" : "No"}</td>
+                        <td>${data.Entrada.Miercoles ? "Si" : "No"}</td>
+                        <td>${data.Entrada.Jueves ? "Si" : "No"}</td>
+                        <td>${data.Entrada.Viernes ? "Si" : "No"}</td>
+                        <td>${data.Observaciones}</td>
+                    `;
+                    entradaTable.appendChild(tableRow);
+                }
+            });
+        }
+
+        function showSalidaData(querySnapshot) {
+            salidaTable.innerHTML = '';
+            querySnapshot.forEach(function (doc) {
+                if (doc.id !== "CDC1-00") {
+                    var data = doc.data();
+                    var tableRow = document.createElement("tr");
+                    tableRow.innerHTML = `
+                        <td>${doc.id}</td>
+                        <td>${data.Nombre}</td>
+                        <td>${data.Localidad}</td>
+                        <td>${data.Salida.Lunes ? "Si" : "No"}</td>
+                        <td>${data.Salida.Martes ? "Si" : "No"}</td>
+                        <td>${data.Salida.Miercoles ? "Si" : "No"}</td>
+                        <td>${data.Salida.Jueves ? "Si" : "No"}</td>
+                        <td>${data.Salida.Viernes ? "Si" : "No"}</td>
+                        <td>${data.Observaciones}</td>
+                    `;
+                    salidaTable.appendChild(tableRow);
+                }
+            });
+        }
+
+        searchInput.addEventListener("input", function () {
+            var searchTerm = searchInput.value.trim();
+            if (searchTerm === "") {
+                testCollection.get().then(function (querySnapshot) {
+                    showEntradaData(querySnapshot);
+                    showSalidaData(querySnapshot);
+                }).catch(function (error) {
+                    console.error("Error al obtener datos: ", error);
+                });
+            } else {
+                testCollection.doc(searchTerm).get().then(function (doc) {
+                    if (doc.exists && doc.id !== "CDC1-00") {
+                        showEntradaData(new Array(doc));
+                        showSalidaData(new Array(doc));
+                    } else {
+                        entradaTable.innerHTML = '<tr><td colspan="9">No se encontraron resultados</td></tr>';
+                        salidaTable.innerHTML = '<tr><td colspan="9">No se encontraron resultados</td></tr>';
+                    }
+                }).catch(function (error) {
+                    console.error("Error al buscar por ID: ", error);
+                });
+            }
+        });
+
+        testCollection.onSnapshot(function (querySnapshot) {
+            showEntradaData(querySnapshot);
+            showSalidaData(querySnapshot);
+        });
+
+        testCollection.get().then(function (querySnapshot) {
+            showEntradaData(querySnapshot);
+            showSalidaData(querySnapshot);
+        }).catch(function (error) {
+            console.error("Error al obtener datos: ", error);
+        });
+
+        document.getElementById("RSemana").addEventListener("click", function () {
+            testCollection.get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    if (doc.id !== "CDC1-00") {
+                        testCollection.doc(doc.id).delete().then(function () {
+                            console.log("Documento eliminado con éxito.");
+                        }).catch(function (error) {
+                            console.error("Error al eliminar documento: ", error);
+                        });
+                    }
+                });
+            }).catch(function (error) {
+                console.error("Error al obtener datos: ", error);
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
