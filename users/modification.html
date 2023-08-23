@@ -91,7 +91,7 @@
         }
 
         input[type="checkbox"] {
-            margin-right: 5px;
+            margin-left: 50px;
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
@@ -101,6 +101,7 @@
             border-radius: 3px;
             background-color: #fff;
             cursor: pointer;
+            vertical-align: middle;
         }
 
         input[type="checkbox"]:checked {
@@ -117,27 +118,25 @@
 
         .checkbox-columns {
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
         }
 
         .column {
             flex: 1;
             text-align: center;
+            padding: 10px;
         }
 
         .checkbox-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            background-color: #dddddd;
+            padding: 8px;
+            text-align: center;
         }
 
-        .checkbox-group label {
-            margin-right: 5px;
-            flex: 1;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            flex: none;
+        #miercolesEntrada,
+        #miercolesSalida {
+            margin-right: 27px;
         }
     </style>
 </head>
