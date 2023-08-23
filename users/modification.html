@@ -114,6 +114,31 @@
         a:hover {
             color: #d10000;
         }
+
+        .checkbox-columns {
+            display: flex;
+            justify-content: center;
+        }
+
+        .column {
+            flex: 1;
+            text-align: center;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .checkbox-group label {
+            margin-right: 5px;
+            flex: 1;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            flex: none;
+        }
     </style>
 </head>
 
@@ -161,36 +186,60 @@
                     resultadoDiv.innerHTML = `
                         <p>Usuario: ${nombre}.</p>
                         <form id="registro-form">
-                            <p>Entrada:</p>
-                            <label for="lunesEntrada">Lunes</label>
-                            <input type="checkbox" id="lunesEntrada" name="diasEntrada" ${entrada.Lunes ? 'checked' : ''}>
-                            <label for="martesEntrada">Martes</label>
-                            <input type="checkbox" id="martesEntrada" name="diasEntrada" ${entrada.Martes ? 'checked' : ''}>
-                            <label for="miércolesEntrada">Miércoles</label>
-                            <input type="checkbox" id="miercolesEntrada" name="diasEntrada" ${entrada.Miercoles ? 'checked' : ''}>
-                            <label for="juevesEntrada">Jueves</label>
-                            <input type="checkbox" id="juevesEntrada" name="diasEntrada" ${entrada.Jueves ? 'checked' : ''}>
-                            <label for="viernesEntrada">Viernes</label>
-                            <input type="checkbox" id="viernesEntrada" name="diasEntrada" ${entrada.Viernes ? 'checked' : ''}>
+                            <div class="column">
+                                <p>Entrada:</p>
+                                <div class="checkbox-group">
+                                    <label for="lunesEntrada">Lunes</label>
+                                    <input type="checkbox" id="lunesEntrada" name="diasEntrada" ${entrada.Lunes ? 'checked' : ''}>
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="martesEntrada">Martes</label>
+                                    <input type="checkbox" id="martesEntrada" name="diasEntrada" ${entrada.Martes ? 'checked' : ''}>
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="miércolesEntrada">Miércoles</label>
+                                    <input type="checkbox" id="miercolesEntrada" name="diasEntrada" ${entrada.Miercoles ? 'checked' : ''}>
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="juevesEntrada">Jueves</label>
+                                    <input type="checkbox" id="juevesEntrada" name="diasEntrada" ${entrada.Jueves ? 'checked' : ''}>
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="viernesEntrada">Viernes</label>
+                                    <input type="checkbox" id="viernesEntrada" name="diasEntrada" ${entrada.Viernes ? 'checked' : ''}>
+                                </div>
+                            </div>
+                                
+                            <div class="column">        
+                                <p>Salida:</p>
+                                <div class="checkbox-group">
+                                    <label for="lunesSalida">Lunes</label>
+                                    <input type="checkbox" id="lunesSalida" name="diasSalida" ${salida.Lunes ? 'checked' : ''}>
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="martesSalida">Martes</label>
+                                    <input type="checkbox" id="martesSalida" name="diasSalida" ${salida.Martes ? 'checked' : ''}>
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="miércolesSalida">Miércoles</label>
+                                    <input type="checkbox" id="miercolesSalida" name="diasSalida" ${salida.Miercoles ? 'checked' : ''}>
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="juevesSalida">Jueves</label>
+                                    <input type="checkbox" id="juevesSalida" name="diasSalida" ${salida.Jueves ? 'checked' : ''}>
+                                 </div>
+                                <div class="checkbox-group">
+                                    <label for="viernesSalida">Viernes</label>
+                                    <input type="checkbox" id="viernesSalida" name="diasSalida" ${salida.Viernes ? 'checked' : ''}>
+                                </div>
+                            </div>
                             
-                            <p>Salida:</p>
-                            <label for="lunesSalida">Lunes</label>
-                            <input type="checkbox" id="lunesSalida" name="diasSalida" ${salida.Lunes ? 'checked' : ''}>
-                            <label for="martesSalida">Martes</label>
-                            <input type="checkbox" id="martesSalida" name="diasSalida" ${salida.Martes ? 'checked' : ''}>
-                            <label for="miércolesSalida">Miércoles</label>
-                            <input type="checkbox" id="miercolesSalida" name="diasSalida" ${salida.Miercoles ? 'checked' : ''}>
-                            <label for="juevesSalida">Jueves</label>
-                            <input type="checkbox" id="juevesSalida" name="diasSalida" ${salida.Jueves ? 'checked' : ''}>
-                            <label for="viernesSalida">Viernes</label>
-                            <input type="checkbox" id="viernesSalida" name="diasSalida" ${salida.Viernes ? 'checked' : ''}>
-                            
-                            <br><br><hr><label for="observaciones">Observaciones:</label><br>
+                            <hr>
+                            <label for="observaciones">Observaciones:</label><br>
                             <textarea id="observaciones" name="observaciones" rows="4" cols="50"></textarea>
-
-
                             <button type="button" id="enviar">Enviar</button>
-                        </form>
+                            </form>
+
                     `;
 
                     const enviarButton = document.getElementById('enviar');
