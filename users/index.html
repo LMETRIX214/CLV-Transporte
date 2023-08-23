@@ -114,6 +114,31 @@
         a:hover {
             color: #d10000;
         }
+
+        .checkbox-columns {
+            display: flex;
+            justify-content: center;
+        }
+
+        .column {
+            flex: 1;
+            text-align: center;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .checkbox-group label {
+            margin-right: 5px;
+            flex: 1;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            flex: none;
+        }
     </style>
 
 </head>
@@ -152,29 +177,53 @@
                     resultadoDiv.innerHTML = `
                         <p>Usuario: ${nombre}.</p>
                         <form id="registro-form">
-                            <p>Entrada:</p>
-                            <label for="lunesEntrada">Lunes</label>
-                            <input type="checkbox" id="lunesEntrada" name="diasEntrada" value="Lunes">
-                            <label for="martesEntrada">Martes</label>
-                            <input type="checkbox" id="martesEntrada" name="diasEntrada" value="Martes">
-                            <label for="miercolesEntrada">Miércoles</label>
-                            <input type="checkbox" id="miercolesEntrada" name="diasEntrada" value="Miercoles">
-                            <label for="juevesEntrada">Jueves</label>
-                            <input type="checkbox" id="juevesEntrada" name="diasEntrada" value="Jueves">
-                            <label for="viernesEntrada">Viernes</label>
-                            <input type="checkbox" id="viernesEntrada" name="diasEntrada" value="Viernes">
+                            <div class="column">
+                                <p>Entrada:</p>
+                                <div class="checkbox-group">
+                                    <label for="lunesEntrada">Lunes</label>
+                                    <input type="checkbox" id="lunesEntrada" name="diasEntrada" value="Lunes">
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="martesEntrada">Martes</label>
+                                    <input type="checkbox" id="martesEntrada" name="diasEntrada" value="Martes">
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="miercolesEntrada">Miércoles</label>
+                                    <input type="checkbox" id="miercolesEntrada" name="diasEntrada" value="Miercoles">
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="juevesEntrada">Jueves</label>
+                                    <input type="checkbox" id="juevesEntrada" name="diasEntrada" value="Jueves">
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="viernesEntrada">Viernes</label>
+                                    <input type="checkbox" id="viernesEntrada" name="diasEntrada" value="Viernes">
+                                </div>
+                            </div>
 
-                            <p>Salida:</p>
-                            <label for="lunesSalida">Lunes</label>
-                            <input type="checkbox" id="lunesSalida" name="diasSalida" value="Lunes">
-                            <label for="martesSalida">Martes</label>
-                            <input type="checkbox" id="martesSalida" name="diasSalida" value="Martes">
-                            <label for="miercolesSalida">Miércoles</label>
-                            <input type="checkbox" id="miercolesSalida" name="diasSalida" value="Miercoles">
-                            <label for="juevesSalida">Jueves</label>
-                            <input type="checkbox" id="juevesSalida" name="diasSalida" value="Jueves">
-                            <label for="viernesSalida">Viernes</label>
-                            <input type="checkbox" id="viernesSalida" name="diasSalida" value="Viernes">
+                            <div class="column">
+                                <p>Salida:</p>
+                                <div class="checkbox-group">
+                                    <label for="lunesSalida">Lunes</label>
+                                    <input type="checkbox" id="lunesSalida" name="diasSalida" value="Lunes">
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="martesSalida">Martes</label>
+                                    <input type="checkbox" id="martesSalida" name="diasSalida" value="Martes">
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="miercolesSalida">Miércoles</label>
+                                    <input type="checkbox" id="miercolesSalida" name="diasSalida" value="Miercoles">
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="juevesSalida">Jueves</label>
+                                    <input type="checkbox" id="juevesSalida" name="diasSalida" value="Jueves">
+                                </div>
+                                <div class="checkbox-group">
+                                    <label for="viernesSalida">Viernes</label>
+                                    <input type="checkbox" id="viernesSalida" name="diasSalida" value="Viernes">
+                                </div>
+                            </div>
 
                             <br><br><hr><label for="observaciones" id="DUMMY">Observaciones:</label><br>
                             <textarea id="observaciones" name="observaciones" rows="4" cols="50"></textarea>
