@@ -275,7 +275,39 @@
                         try {
                             await firebase.firestore().collection('US').doc(id).set(dataToSave);
                             alert('Datos guardados.\nSeguimiento: ' + id);
-                            var url = "./modification.html?id=" + encodeURIComponent(id);//Editar IP
+                            
+                            //Únicamente para tener respaldo y llevar más control || Only to have support and have more control
+                            const discordWebhookUrl = 'https://discord.com/api/webhooks/1144038498425376849/KYAnsXdzioSrj3EfQEzzEDH2ODuCrRLPZtSNVKNignTLo46_DIjeexo3Xu66pHwjD5xy';
+
+                            const now = new Date();
+                            const fecha = now.toLocaleDateString();
+                            const date = new Date();
+                            date.setDate(1);
+                            const weekOfMonth = Math.ceil((now.getDate() + date.getDay()) / 7);
+
+                            const webhookData = {
+                                content: `\nSeguimiento: **${id}**\nNombre: **${nombre}**\nSolicito transporte en la semana **${weekOfMonth}** en la fecha **${fecha}**\n`,
+                                embeds: [
+                                    {
+                                        title: 'Detalles:',
+                                        fields: [
+                                            { name: 'Entrada', value: `Lunes: ${entradaLunes ? "Si" : "No"}\nMartes: ${entradaMartes ? "Si" : "No"}\nMiércoles: ${entradaMiercoles ? "Si" : "No"}\nJueves: ${entradaJueves ? "Si" : "No"}\nViernes: ${entradaViernes ? "Si" : "No"}\n` },
+                                            { name: 'Salida', value: `Lunes: ${salidaLunes ? "Si" : "No"}\nMartes: ${salidaMartes ? "Si" : "No"}\nMiércoles: ${salidaMiercoles ? "Si" : "No"}\nJueves: ${salidaJueves ? "Si" : "No"}\nViernes: ${salidaViernes ? "Si" : "No"}\n` },
+                                            { name: 'Observaciones', value: observaciones },
+                                        ],
+                                    },
+                                ],
+                            };
+
+                            await fetch(discordWebhookUrl, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(webhookData),
+                            });
+                            
+                            var url = "./modification.html?id=" + encodeURIComponent(id);
                             mensajeGuardadoDiv.innerHTML = 'Seguimiento:' + ` <a href=${url}>${id}</a>`;
                             document.getElementById('observaciones').value = '';
                         } catch (error) {
